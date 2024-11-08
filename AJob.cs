@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,27 +16,28 @@ namespace ThiCuoiKy
 
         private PlanItem job;
         private DailyPlan daily;
+        private JobEventChange eventHandler;
         public PlanItem Job { get => job; set => job = value; }
         public DailyPlan Daily { get => daily; set => daily = value; }
-
-        private JobEventChange eventHandler;
+        internal JobEventChange EventHandler { get => eventHandler; set => eventHandler = value; }
 
         public event EventHandler Edited
         {
-            add { eventHandler.Edited += value; }
-            remove { eventHandler.Edited -= value; }
+            add { EventHandler.Edited += value; }
+            remove { EventHandler.Edited -= value; }
         }
         public event EventHandler Deleted
         {
-            add { eventHandler.Deleted += value; }
-            remove { eventHandler.Deleted -= value; }
+            add { EventHandler.Deleted += value; }
+            remove { EventHandler.Deleted -= value; }
         }
         public AJob(PlanItem job)
         {
             InitializeComponent();
             cbStatus.DataSource = PlanItem.liststatus;
+            //cbRepeat.DataSource = PlanItem.Repeatstatus;
             this.Job = job;
-            this.eventHandler = new JobEventChange();
+            this.EventHandler = new JobEventChange();
             ShowInfo();
         }
         void ShowInfo()
@@ -50,7 +51,7 @@ namespace ThiCuoiKy
             cbStatus.SelectedIndex = PlanItem.liststatus.IndexOf(Job.Status);
             ckbDone.Checked = PlanItem.liststatus.IndexOf(Job.Status) == (int)StatusEnum.Done ? true : false;
         }
-        
+
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             cbStatus.SelectedIndex = ckbDone.Checked ? (int)StatusEnum.Done : (int)StatusEnum.Doing;
@@ -69,7 +70,7 @@ namespace ThiCuoiKy
 
         private void button2_Click(object sender, EventArgs e)
         {
-            eventHandler.OnDeleted(this, EventArgs.Empty);
+            EventHandler.OnDeleted(this, EventArgs.Empty);
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -82,15 +83,15 @@ namespace ThiCuoiKy
             Job.FromTime = new Point((int)nmFromHour.Value, (int)nmFromMinute.Value);
             Job.ToTime = new Point((int)nmToHour.Value, (int)nmToMinute.Value);
             Job.Status = PlanItem.liststatus[cbStatus.SelectedIndex];
-            eventHandler.OnEdited(this, EventArgs.Empty);
+            EventHandler.OnEdited(this, EventArgs.Empty);
 
             if (!ckbDone.Checked && DateTime.Now.Year == Job.Date.Year && DateTime.Now.Month == Job.Date.Month && DateTime.Now.Day == Job.Date.Day)
             {
-                if ((DateTime.Now.Hour < nmFromHour.Value && DateTime.Now.Minute < nmFromMinute.Value) || (DateTime.Now.Hour < nmFromHour.Value) || (DateTime.Now.Hour == nmFromHour.Value && DateTime.Now.Minute < nmFromMinute.Value ))
+                if ((DateTime.Now.Hour < nmFromHour.Value && DateTime.Now.Minute < nmFromMinute.Value) || (DateTime.Now.Hour < nmFromHour.Value) || (DateTime.Now.Hour == nmFromHour.Value && DateTime.Now.Minute < nmFromMinute.Value))
                 {
                     cbStatus.SelectedIndex = (int)StatusEnum.Coming;
                 }
-                else if ((DateTime.Now.Hour > nmToHour.Value && DateTime.Now.Minute > nmToMinute.Value) || (DateTime.Now.Hour > nmToHour.Value) || (DateTime.Now.Hour == nmToHour.Value && DateTime.Now.Minute > nmToMinute.Value)) 
+                else if ((DateTime.Now.Hour > nmToHour.Value && DateTime.Now.Minute > nmToMinute.Value) || (DateTime.Now.Hour > nmToHour.Value) || (DateTime.Now.Hour == nmToHour.Value && DateTime.Now.Minute > nmToMinute.Value))
                 {
                     cbStatus.SelectedIndex = (int)StatusEnum.Late;
                 }
@@ -102,16 +103,16 @@ namespace ThiCuoiKy
 
         private void nmFromHour_ValueChanged(object sender, EventArgs e)
         {
-            if (nmFromHour.Value == 24 )
+            if (nmFromHour.Value == 24)
             {
                 nmFromHour.Value = 0;
-            }    
+            }
 
         }
 
         private void nmFromMinute_ValueChanged(object sender, EventArgs e)
         {
-            if(nmFromMinute.Value == 60 )
+            if (nmFromMinute.Value == 60)
             {
                 nmFromMinute.Value = 0;
             }
