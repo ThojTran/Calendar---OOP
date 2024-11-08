@@ -20,7 +20,7 @@ A project developed with **Object-Oriented Programming (OOP) principles in C#**.
 
 | **Thành viên**          | **Chức năng**              |
 |-------------------------|----------------------------|
-| Trần Thọ                | Developer                  |
+| Trần Thọ                | Nhóm trưởng, Developer      |
 | Nguyễn Huỳnh Tấn Phát   | Developer                  |
 | Vũ Hoàng Bảo            | Developer                  |
 | Nguyễn Minh Huy         | Developer                  |
