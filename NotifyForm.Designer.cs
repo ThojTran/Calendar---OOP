@@ -51,7 +51,6 @@
             this.lbNotify.Size = new System.Drawing.Size(44, 16);
             this.lbNotify.TabIndex = 2;
             this.lbNotify.Text = "label1";
-            this.lbNotify.Click += new System.EventHandler(this.lbNotify_Click);
             // 
             // btnOK
             // 
