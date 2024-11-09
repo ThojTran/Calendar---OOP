@@ -28,13 +28,17 @@ namespace ThiCuoiKy
             List<PlanItem> todayJobs = new List<PlanItem>();
             foreach (PlanItem job in jobs)
             {
-                if (job.Date.Date == currentDate.Date &&
-                    (job.Status == "DOING" || job.Status == "COMING"))
-                {
-                    todayJobs.Add(job);
-                }
+                 if (job.Date.Year == currentDate.Year &&
+                    job.Date.Month == currentDate.Month &&
+                    job.Date.Day == currentDate.Day)
+                     {
+                     if (job.Status == PlanItem.liststatus[(int)StatusEnum.Coming] ||
+                        job.Status == PlanItem.liststatus[(int)StatusEnum.Doing])
+                         {
+                             todayJobs.Add(job);
+                         }    
+                     }    
             }
-
             // Nếu có công việc cần thông báo, trả về true
             return todayJobs.Count > 0;
         }
