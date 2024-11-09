@@ -31,10 +31,4 @@ namespace ThiCuoiKy
             this.Close();
         }
     }
-    // Tóm gọn: lớp NotifyForm hiển thị thông báo qua lbNotify, đăng ký sự kiện đóng khi nút OK được nhấn.
-    
-    private void lbNotify_Click(object sender, EventArgs e)
-    {
-
-    }
 }
