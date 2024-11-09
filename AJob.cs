@@ -98,7 +98,7 @@ namespace ThiCuoiKy
                 else
                     checkBox1_CheckedChanged(this, EventArgs.Empty);
             }
-
+            MessageBox.Show("Công việc đã được chỉnh sửa và lưu!", "Thông báo", MessageBoxButtons.OK);
         }
 
         private void nmFromHour_ValueChanged(object sender, EventArgs e)
