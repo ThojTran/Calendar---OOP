@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ThiCuoiKy
+{
     // Đây là lớp trừu tượng chứa các hành vi cơ bản của hệ thống thông báo
     // Lớp này được định nghĩa là abstract, tức là không thể khởi tạo trực tiếp. Nó sẽ được kế thừa và implement bởi các lớp cụ thể.
     public abstract class NotificationBase
